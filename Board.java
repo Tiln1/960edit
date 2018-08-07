@@ -6,14 +6,21 @@ import javax.imageio.ImageIO;
 import java.io.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
+
+import org.junit.runner.JUnitCore;
+import org.junit.runner.Result;
+
 import java.util.*;
 import java.util.ArrayList;
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
 
 
 class Board implements ActionListener,Serializable{ 
     private JFrame boardFrame;
     private JPanel boardPanel, player1Panel, player2Panel, menuPanel, timePanel;
-    private Cell squares[][];
+    public Cell squares[][] = new Cell[9][9];
     private JLabel player1, player2, timeLabel, turnLabel, checkLabel;
     private ArrayList<Cell> highlightedCells = new ArrayList<>();
     private int chance;
@@ -72,7 +79,8 @@ class Board implements ActionListener,Serializable{
         squares = new Cell[9][9];
   
     }
-
+    
+    
     public void initialiseBoard(boolean nine60){
         JLabel letteredLabel[] = new  JLabel[9];
         JLabel numberedLabel[] = new  JLabel[8];
@@ -123,12 +131,18 @@ class Board implements ActionListener,Serializable{
         	initialiseWhitePieces();
         	initialiseBlackPieces();
         }
+//        Class<?>[] classes = new Class<?>[1];
+//        tests t = new tests();
+//        classes[0] = t.getClass();
+//        JUnitCore junit = new JUnitCore();
+//        Result result = junit.run(classes);
+//        System.out.println("Failures:" + result.getFailureCount());
         
-        initialiseHashMAP();
-        Check.setBoardObject(this);
-		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		boardFrame.setLocation(dim.width/2-boardFrame.getSize().width/2, dim.height/2-boardFrame.getSize().height/2);
-		boardFrame.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
+//        initialiseHashMAP();
+//        Check.setBoardObject(this);
+//		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+//		boardFrame.setLocation(dim.width/2-boardFrame.getSize().width/2, dim.height/2-boardFrame.getSize().height/2);
+//		boardFrame.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
     }
 
     public void initialiseWhitePieces(){
@@ -196,7 +210,7 @@ class Board implements ActionListener,Serializable{
         whitePieceRef.add(p5);
         
         do {
-        	rand = arr.get((int)(Math.random()*(arr.size())-1));
+        	rand = arr.get((int)(Math.random()*(arr.size())));
         	System.out.println(rand);
     	}while(rand%2 == 0);
         forMirroring.add(arr.remove(arr.indexOf(rand)));
@@ -205,7 +219,7 @@ class Board implements ActionListener,Serializable{
         whitePieceRef.add(p2);
         
         do {
-        	rand = arr.get((int)(Math.random()*(arr.size())-1));
+        	rand = arr.get((int)(Math.random()*(arr.size())));
         	System.out.println(rand);
         }while(rand%2 == 1);
         forMirroring.add(arr.remove(arr.indexOf(rand)));
